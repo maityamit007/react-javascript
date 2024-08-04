@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="tab.js"></script>
+    <style>
+        body{
+            display: flex;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: blueviolet;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            max-width: 20vw;
+            overflow: hidden;
+        }
+        .tab-container{
+            display: flex;
+            flex-direction: row;
+            border-radius: 8px;
+        }
+        .tab{
+            padding: 10px;
+            background-color: rgb(227, 227, 227);
+            color: black;
+            border: 1px solid #e0dede;
+            cursor: pointer;
+        }
+        .selected{
+            background-color: rgb(101, 204, 101);
+            color: white;
+        }
+        .display-container{
+            background-color: #fff;
+            display: flex;
+            flex: content;
+            max-height: 30vh;
+        }
+        .w-full{
+            width: 100%;
+        }
+        
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div id="container" class="container">
+        <div class="tab-container w-full">
+            <div data-tab = "one" class="tab tab-one">Tab One</div>
+            <div data-tab = "two" class="tab tab-two">Tab Two</div>
+            <div data-tab = "three" class="tab tab-three">Tab Three</div>
+        </div>
+        <div id="display-container" class="display-container w-full">
+            <p>sadfnjksdnfjnadfkjnjsadfnjksdnfjnadfkjnjsadfnjksdnfjnadfkjnjsadfnjksdnfjnadfkjnjsadfnjksdnfjnadfkjnjsadfnjksdnfjnadfkjnj</p>
+        </div>
+    </div>
+</body>
+</html>

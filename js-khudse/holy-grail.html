@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style rel="style-sheet" href="style.css"></style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Grail Layout</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: sans-serif;
+        }
+
+        header,
+        footer {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            background-color: black;
+            color: bisque;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            height: 100vh;
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .side-content {
+            padding: 20px;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .left {
+            background-color: lightpink;
+        }
+
+        .right {
+            background-color: lightblue;
+        }
+
+        @media only screen and (max-width: 400px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>Header</h2>
+    </header>
+    <div class="main-container">
+        <aside class="side-content left">
+            <h2>Left Side</h2>
+            <span>Left Side</span>
+        </aside>
+        <main>
+            <h2>Main Content</h2>
+            <span>Main Content</span>
+        </main>
+        <aside class="side-content right">
+            <h2>Right Side</h2>
+            <span>Right Side</span>
+        </aside>
+    </div>
+    <footer>
+        <h2>Footer</h2>
+    </footer>
+</body>
+
+</html>
