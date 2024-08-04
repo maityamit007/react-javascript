@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<link>
+<script src="deligation.js"></script>
+<link rel="stylesheet" href="deligationStyle.css">
+<style>
+    body {
+        span:hover {
+            font-weight: bold;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        th:hover{
+            cursor: pointer;
+            background-color: yellow;
+        }
+    }
+</style>
+</link>
+</head>
+
+<body>
+    <div class="main">
+
+        <div id="info" class="container">
+            <div class="article" data-info-container="Horse">
+                <div class="cross-contianer" data-buttonCross="Horse">
+                    <button class="cross">[X]</button>
+                </div>
+                <h1>Horse</h1>
+                <p>The horse is one of two extant subspecies of Equus ferus. It is an odd-toed ungulate mammal belonging
+                    to
+                    the taxonomic family Equidae. The horse has evolved over the past 45 to 55 million years from a
+                    small
+                    multi-toed creature, Eohippus, into the large, single-toed animal of today.</p>
+
+            </div>
+
+            <div class="article" data-info-container="Donkey">
+                <div class="cross-contianer" data-buttonCross="Donkey">
+                    <button class="cross">[X]</button>
+                </div>
+                <h1>Donkey</h1>
+                <p>The horse is one of two extant subspecies of Equus ferus. It is an odd-toed ungulate mammal belonging
+                    to
+                    the taxonomic family Equidae. The horse has evolved over the past 45 to 55 million years from a
+                    small
+                    multi-toed creature, Eohippus, into the large, single-toed animal of today.</p>
+
+            </div>
+
+            <div class="article" id='article' data-info-container="Cat">
+                <div class="cross-contianer" data-buttonCross="Cat">
+                    <button class="cross">[X]</button>
+                </div>
+                <h1>Cat</h1>
+                <p>The horse is one of two extant subspecies of Equus ferus. It is an odd-toed ungulate mammal belonging
+                    to
+                    the taxonomic family Equidae. The horse has evolved over the past 45 to 55 million years from a
+                    small
+                    multi-toed creature, Eohippus, into the large, single-toed animal of today.</p>
+            </div>
+        </div>
+        <div>
+            <ul id="info2">
+                <li>Animals
+                    <ul>
+                        <li>Mammals
+                            <ul>
+                                <li>Cow</li>
+                                <li>Donkey</li>
+                                <li>Frog</li>
+                                <li>Tigers</li>
+                            </ul>
+                        </li>
+                        <li>Others
+                            <ul>
+                                <li>Lion</li>
+                                <li>Leopard</li>
+                                <li>Brids</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>Fishes
+                    <ul>
+                        <li>Aquarium
+                            <ul>
+                                <li>Guppy</li>
+                                <li>Angel Fishes</li>
+                            </ul>
+                        </li>
+                        <li>Sea
+                            <ul>
+                                <li>Sea trout</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="info3">
+        <table>
+            <thead>
+                <tr>
+                    <th data-type="number">Age</th>
+                    <th data-type="string">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>12</td>
+                    <td>Jess</td>
+                </tr>
+                <tr>
+                    <td>94</td>
+                    <td>Bard</td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td>Ann</td>
+                </tr>
+                <tr>
+                    <td>106</td>
+                    <td>Joe</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

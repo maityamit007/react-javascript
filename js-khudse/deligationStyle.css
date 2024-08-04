@@ -1,0 +1,26 @@
+.container{
+    background-color: bisque;
+}
+
+.article{
+    border-top: 3px solid rgb(148, 233, 148);
+    margin-top: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cross-contianer{
+    position: absolute;
+    right: 0px;
+}
+
+.cross{
+    color: red;
+}
+
+button{
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
