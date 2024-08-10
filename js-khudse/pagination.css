@@ -1,0 +1,24 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+
+.button-container{
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    margin-top: 20px;
+}
+
+.pagination-button{
+    padding: 10px;
+    cursor: pointer;
+}
