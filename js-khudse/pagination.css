@@ -11,6 +11,10 @@ th {
     background-color: #f2f2f2;
 }
 
+.selected {
+    background-color: #fffefe92;
+}
+
 .button-container{
     display: flex;
     justify-content: center;

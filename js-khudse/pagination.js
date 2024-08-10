@@ -1,9 +1,12 @@
+let resp = [];
+let limit = 100;
+let selected = '';
+
 async function loadApiData() {
-    return await fetch(`https://dummyjson.com/products?limit=100`).then((resp) => resp.json());
+    return await fetch(`https://dummyjson.com/products?limit=${limit}`).then((resp) => resp.json());
 }
 
-async function prepareTable(container, page) {
-    let resp = await loadApiData();
+function prepareTable(container, page) {
     let table = document.createElement('table');
     table.innerHTML = !([undefined, null, ''].includes(resp)) ?
         `<table>
@@ -21,23 +24,31 @@ async function prepareTable(container, page) {
             </tr>`
         ).join('')}
         </tbody></table>` : `<h2>Loading...</h2>`
-    container.append(table);
-    prepareButons(container);
+    container.prepend(table);
 }
 
 function handlePageClick(page) {
-    let container = document.getElementById('container');
-    container.innerHTML = ''
+    let table = document.querySelector('table');
+    let buttonList = document.querySelectorAll('button');
+    for(let btn of buttonList){
+        if(btn.id == page){
+            btn.classList.add('selected');
+        }else{
+            btn.classList.remove('selected');
+        }
+    }
+    table.innerHTML = '';
+    selected = page;
     prepareTable(container, page);
 }
 
-function prepareButons (container) {
+function prepareButons(container) {
     let paginationButtons = document.createElement('pagination-buttons');
 
     paginationButtons.innerHTML = `<div class="button-container">
-    ${Array.from({ length: 10 }, (_, i) => i + 1).map((ele) =>
+    ${Array.from({ length: limit / 10 }, (_, i) => i + 1).map((ele) =>
         `
-    <button class="pagination-button" onClick={handlePageClick(${ele})}>${ele}</button>
+    <button id=${ele} class="pagination-button ${selected == ele ? 'selected' : ''}" onClick={handlePageClick(${ele})}>${ele}</button>
     `
     ).join('')
         }
@@ -47,6 +58,10 @@ function prepareButons (container) {
 
 document.addEventListener('DOMContentLoaded', () => {
     let container = document.getElementById('container');
-    prepareTable(container, 1);
+    loadApiData().then((el) => {
+        resp = el;
+        prepareTable(container, 1);
+        prepareButons(container);
+    });
 })
 
