@@ -13,7 +13,7 @@ function DynamicForm() {
     },[])
 
     return (
-        <div className='py-20 bg-gray-900'>
+        <div className=' bg-gray-900 sm:py-0 md:py-20'>
             <Form schema={schema}/>
         </div>
     )

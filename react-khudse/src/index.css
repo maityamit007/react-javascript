@@ -21,3 +21,23 @@ code {
 .form{
   min-width: 1200px;
 }
+
+.custom-radio input[type="radio"] {
+  transform: scale(1.5); /* Scale size by 1.5 times */
+  margin-right: 10px;
+}
+@media screen and (max-width: 1440px) {
+  .form{
+    min-width: 800px;
+  }
+}
+
+@media screen and (max-width: 896px) {
+  body{
+    border: 0px;
+  }
+
+  .form{
+    min-width: 300px;
+  }
+}
