@@ -1,0 +1,27 @@
+.star-contianer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    gap: 16px;
+}
+
+.star{
+    display: flex;
+    flex-direction: row;
+    min-width: 50px;
+    gap: 6px;
+    height: 50px;
+    background-color: white;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+
+}
+
+.star:hover{
+    background-color: gold;
+}
+
+.star_hover{
+    background-color: gold;
+}
