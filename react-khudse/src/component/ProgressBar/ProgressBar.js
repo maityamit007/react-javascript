@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './ProgressBar.css';
+import useDarkTheme from '../../hooks/DarkTheme';
 
 function ProgressBar() {
     let [percentage, setPercentage] = useState(1);
 
-    useEffect(() => {
-        let root = document.querySelector(':root');
-        root.classList.add('dark');
-        return () => {
-            root.classList.remove('dark');
-        }
-    }, [])
+    useDarkTheme({ className: 'dark' });
 
     useEffect(() => {
         let interval = setInterval(() => {
@@ -25,7 +20,7 @@ function ProgressBar() {
 
 
     return (
-        <div className='container w-full'>
+        <div className='progress_container'>
             <h2 className='m-5 text-white text-xl'>Battery Life</h2>
             <div className='progress_bar bg-gray-300'
                 aria-valuemax={100} // for accessiblity

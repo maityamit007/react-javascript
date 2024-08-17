@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './StarRating.css';
+import useDarkTheme from '../../hooks/DarkTheme.js';
 
 function StarRating({ numberOfStars = 5 }) {
     let [ratingList, setRatingList] = useState([]);
     let [hoverList, setHoverList] = useState([]);
 
-    useEffect(() => {
-        let root = document.querySelector(':root');
-        root.classList.add('dark');
-        return () => {
-            root.classList.remove('dark');
-        }
-    }, []);
+    useDarkTheme({ className: 'dark' });
 
     let setRating = (ele) => {
         let arr = Array.from({ length: ele }, (_, _i) => _i + 1);
         setRatingList(() => [...arr])
     }
 
-
     return (
-        <div className='container'>
+        <div className='progress_container'>
             <div className='star-contianer'>
                 {Array.from({ length: numberOfStars }, (_, _i) => _i + 1).map((ele) => {
                     let classList = '';
-                    if(ele < hoverList){
+                    if (ele < hoverList) {
                         classList = 'star_hover';
                     }
                     return (<button

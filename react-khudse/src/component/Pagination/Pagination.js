@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Pagination.css';
+import useDarkTheme from '../../hooks/DarkTheme';
 
 function Pagination() {
   let [product, setProduct] = useState([]);
@@ -10,6 +11,8 @@ function Pagination() {
   useEffect(() => {
     loadApiData();
   }, []);
+
+  useDarkTheme({className: 'dark'})
 
   async function loadApiData() {
     let resp = await fetch(`https://dummyjson.com/products?limit=${limit}`).then((resp) => resp.json());

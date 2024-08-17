@@ -16,6 +16,7 @@ code {
 
 .dark {
   background-color: #111827;
+  color: white;
 }
 
 .form{
@@ -26,6 +27,7 @@ code {
   transform: scale(1.5); /* Scale size by 1.5 times */
   margin-right: 10px;
 }
+
 @media screen and (max-width: 1440px) {
   .form{
     min-width: 800px;

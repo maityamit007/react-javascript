@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import useDarkTheme from '../../hooks/DarkTheme';
 
 function Carousel({
     loading,
@@ -11,6 +12,8 @@ function Carousel({
     let ref = useRef(null);
     let [width, setWidth] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    useDarkTheme({ className: 'light' });
 
     let prevImage = () => {
         setCurrentIndex((prevIndex) =>
