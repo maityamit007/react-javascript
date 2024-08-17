@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MenuComponents } from '../Utils/Constants';
+import useClickOutside from '../../hooks/useClickOutside';
 
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [nestedMenuOpen, setNestedMenuOpen] = useState(false);
 
+    
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
-
+    
+    useClickOutside(menuOpen, toggleMenu, { id: 'menu-transform' });
     const toggleNestedMenu = () => {
         setNestedMenuOpen(!nestedMenuOpen);
     };
@@ -36,12 +39,14 @@ function Header() {
 
             {menuOpen && (
                 <ul
+                    id={'menu-transform'}
                     role="menu"
-                    className="absolute right-0 header-color z-10 min-w-[180px] overflow-auto rounded-b-sm  bg-gray-800 p-3 text-sm font-normal text-white shadow-lg focus:outline-none"
+                    className="absolute menu-transform right-0 header-color z-10 min-w-[280px] overflow-auto rounded-b-sm  bg-gray-800 p-3 text-sm font-normal text-white shadow-lg focus:outline-none"
                 >
-                    {Object.keys(MenuComponents).map((ele) => (
+                    {Object.keys(MenuComponents).map((ele, ixx) => (
                         <Link
                             role="menuitem"
+                            key={ixx}
                             className="block w-full cursor-pointer select-none rounded-md px-3 py-2 text-start leading-tight transition-all hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white active:bg-gray-700 active:text-white"
                             to={MenuComponents[ele].path}
                         >
