@@ -5,6 +5,9 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -17,6 +20,10 @@ code {
 .dark {
   background-color: #111827;
   color: white;
+}
+
+.header-color{
+  background-color: #0d1220;
 }
 
 .form{

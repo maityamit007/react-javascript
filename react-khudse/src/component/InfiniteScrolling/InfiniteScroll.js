@@ -46,7 +46,7 @@ function InfiniteScroll() {
     return (
         <div>
             <div className='flex flex-col items-center'>
-                <h1 className='text-xl font-bold mt-10'>Scroll Table</h1>
+                <h1 className='text-xl font-bold m-10'>Scroll Table</h1>
                 <div>
                     <table>
                         <thead>

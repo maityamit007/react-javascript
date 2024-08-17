@@ -21,7 +21,7 @@ function Pagination() {
 
   return (
     <div className='flex flex-col items-center'>
-      <h1 className='text-xl font-bold mt-10'>Pagination Table</h1>
+      <h1 className='text-xl font-bold m-10'>Pagination Table</h1>
       <div>
         <table>
           <thead>
