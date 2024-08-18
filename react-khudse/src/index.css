@@ -39,6 +39,16 @@ code {
   /* transform: translate(50px, 0px); */
 }
 
+.shopping-cart input[type="radio"],
+.shopping-cart input[type="checkbox"]{
+  transform: scale(1.2);
+  margin-right: 10px;
+}
+
+.shopping-item:last-child{
+  flex: 1;
+}
+
 @media screen and (max-width: 1440px) {
   .form{
     min-width: 800px;
