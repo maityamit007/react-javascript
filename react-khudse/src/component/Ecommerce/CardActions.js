@@ -6,7 +6,6 @@ function CardActions() {
     let { dispatchFilter } = ShoppingCartContext();
 
     const handleChange = (e) => {
-        console.log(e.target.value);
         dispatchFilter({
             type: 'FILTER_BY_SEARCH',
             payload: e.target.value
