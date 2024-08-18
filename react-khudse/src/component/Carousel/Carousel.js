@@ -10,10 +10,10 @@ function Carousel({
     imageLimit = images.length,
 }) {
     let ref = useRef(null);
-    let [width, setWidth] = useState(0);
+    let [width, setWidth] = useState(200);
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    useDarkTheme({ className: 'light' });
+    useDarkTheme({ className: 'dark' });
 
     let prevImage = () => {
         setCurrentIndex((prevIndex) =>

@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { ShoppingCartContext } from '../../context/Context';
 import StarRating from '../StarRating/StarRating';
-import useDarkTheme from '../../hooks/DarkTheme';
 
 const Products = ({
     products,

@@ -26,7 +26,7 @@ function CourselHome() {
   }
 
   return (
-    <div className="carousel-container">
+    <div className="star-contianer w-full">
       <Carousel
         images={image}
         loading={loading}
