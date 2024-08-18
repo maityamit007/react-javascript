@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { MenuComponents } from '../Utils/Constants';
 import useClickOutside from '../../hooks/useClickOutside';
 
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
+    let navigate = useNavigate();
     const [nestedMenuOpen, setNestedMenuOpen] = useState(false);
 
-    
+
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
-    
+    const handleMoveForward = (ele) => {
+        navigate(MenuComponents[ele].path);
+        setMenuOpen(false);
+    }
     useClickOutside(menuOpen, toggleMenu, { id: 'menu-transform' });
+
     const toggleNestedMenu = () => {
         setNestedMenuOpen(!nestedMenuOpen);
     };
@@ -44,14 +50,14 @@ function Header() {
                     className="absolute menu-transform right-0 header-color z-10 min-w-[280px] overflow-auto rounded-b-sm  bg-gray-800 p-3 text-sm font-normal text-white shadow-lg focus:outline-none"
                 >
                     {Object.keys(MenuComponents).map((ele, ixx) => (
-                        <Link
+                        <div
                             role="menuitem"
                             key={ixx}
                             className="block w-full cursor-pointer select-none rounded-md px-3 py-2 text-start leading-tight transition-all hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white active:bg-gray-700 active:text-white"
-                            to={MenuComponents[ele].path}
+                            onClick={() => { handleMoveForward(ele) }}
                         >
                             {MenuComponents[ele].title}
-                        </Link>
+                        </div>
                     ))}
 
                     {/* Nested Menu */}
@@ -65,18 +71,6 @@ function Header() {
                                 className="block w-full cursor-pointer select-none rounded-md px-3 py-2 text-start leading-tight transition-all hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white active:bg-gray-700 active:text-white"
                             >
                                 Nested Menu Item 1
-                            </li>
-                            <li
-                                role="menuitem"
-                                className="block w-full cursor-pointer select-none rounded-md px-3 py-2 text-start leading-tight transition-all hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white active:bg-gray-700 active:text-white"
-                            >
-                                Nested Menu Item 2
-                            </li>
-                            <li
-                                role="menuitem"
-                                className="block w-full cursor-pointer select-none rounded-md px-3 py-2 text-start leading-tight transition-all hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white active:bg-gray-700 active:text-white"
-                            >
-                                Nested Menu Item 3
                             </li>
                         </ul>
                     )}
