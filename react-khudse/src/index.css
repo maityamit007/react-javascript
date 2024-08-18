@@ -49,6 +49,20 @@ code {
   flex: 1;
 }
 
+.disabled:disabled {
+  background-color: #cccccc; 
+  color: #fff; 
+  border: 1px solid #aaaaaa;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.disabled:disabled:hover {
+  background-color: #cccccc; 
+  color: #fff; 
+  border: 1px solid #aaaaaa; 
+}
+
 @media screen and (max-width: 1440px) {
   .form{
     min-width: 800px;

@@ -9,7 +9,9 @@ const Products = ({
     sortType,
     includeStock,
     currentRating,
-    searchBox
+    searchBox,
+    dispatchCart,
+    cartItems
 }) => {
     let filteredProducts = useMemo(() => {
         let filteredProduct = products;
@@ -19,11 +21,11 @@ const Products = ({
         }
         if (!includeStock) {
             filteredProduct = filteredProduct.filter((ele) => !ele.inStock);
-        }      
+        }
         if (currentRating !== 0) {
             filteredProduct = filteredProduct.filter((ele) => ele.rating == currentRating);
         }
-        if(searchBox !== ''){
+        if (searchBox !== '') {
             filteredProduct = filteredProduct.filter((ele) => ele.title.toLowerCase().includes(String(searchBox).toLowerCase()));
         }
         setCurrentPage(1);
@@ -35,16 +37,39 @@ const Products = ({
             <div className='grid grid-cols-1 shopping-item md:grid-cols-3 flex-1 my-3 mx-2'>
                 {
                     (filteredProducts.length > 0) ?
-                    filteredProducts.slice(currentPage * 10 - 10, currentPage * 10).map((ele, index) =>
-                        <div key={index} className='flex flex-col items-center bg-gray-800 p-4 m-2 rounded-lg gap-2'>
-                            <img src={ele.thumbnail} alt={ele.title} className='h-32 w-32 object-cover mx-auto mb-2' />
-                            <span className='text-white'>{'Item Name: ' + ele.title}</span>
-                            <span className='text-white'>{'Price: ' + ele.price}</span>
-                            <StarRating shoppingCart={true} numberOfStars={5} currentRating={ele.rating} />
-                        </div>
-                    ): (
-                        <span className="text-white">No products found</span>
-                      )
+                        filteredProducts.slice(currentPage * 10 - 10, currentPage * 10).map((ele, index) => {
+                            let alreadyAdded = cartItems.some((e) => e.id == ele.id);
+
+                            const handleClick = (ele) => {
+                                if (alreadyAdded) {
+                                    dispatchCart({
+                                        type: 'REMOVE_FROM_CART',
+                                        payload: ele
+                                    })
+                                } else {
+                                    dispatchCart({
+                                        type: 'ADD_TO_CART',
+                                        payload: ele
+                                    })
+                                }
+                            }
+
+                            return (<div key={index} className='flex flex-col items-center bg-gray-800 p-4 m-2 rounded-lg gap-2'>
+                                <img src={ele.thumbnail} alt={ele.title} className='h-32 w-32 object-cover mx-auto mb-2' />
+                                <span className='text-white'>{'Item Name: ' + ele.title}</span>
+                                <span className='text-white'>{'Price: ' + ele.price}</span>
+                                <StarRating shoppingCart={true} numberOfStars={5} currentRating={ele.rating} />
+                                <button
+                                    className={`py-2 my-2 px-3 bg-slate-600 text-md rounded-md text-white ${ele.inStock ? 'disabled' : ''}`}
+                                    disabled={ele.inStock}
+                                    onClick={() => handleClick(ele)}
+                                    type='button'>{ele.inStock ? 'Out Of Stock' : alreadyAdded ? `Remove From Cart` : `Add To Cart`}
+                                </button>
+                            </div>)
+                        }
+                        ) : (
+                            <span className="text-white">No products found</span>
+                        )
                 }
             </div>
             <Pagination
@@ -124,12 +149,12 @@ const Filters = ({
                 type: 'INCLUDE_OUT_OF_STOCK',
                 payload: change
             })
-        } else if(changeType == 'rating'){
+        } else if (changeType == 'rating') {
             dispatchFilter({
                 type: 'FILTER_BY_RATING',
                 payload: change
             })
-        } else if(changeType == 'reset'){
+        } else if (changeType == 'reset') {
             dispatchFilter({
                 type: 'RESET',
                 payload: change
@@ -145,11 +170,11 @@ const Filters = ({
                 <label className="block text-md font-medium text-gray-900 dark:text-white">{`Ascending`}</label>
             </div>
             <div className='flex flex-row items-center gap-1'>
-                <input className='cursor-pointer custom-radio' type='radio' onChange={() => handleChange('desc', 'sort')} checked={sortType == 'desc' ? true : false}/>
+                <input className='cursor-pointer custom-radio' type='radio' onChange={() => handleChange('desc', 'sort')} checked={sortType == 'desc' ? true : false} />
                 <label className="block text-md font-medium text-gray-900 dark:text-white" >{`Descending`}</label>
             </div>
             <div className='flex flex-row items-center my-2 gap-1'>
-                <input className='cursor-pointer' type='checkbox' checked={includeStock} onChange={(event) => handleChange(event.target.checked, 'checkbox')}/>
+                <input className='cursor-pointer' type='checkbox' checked={includeStock} onChange={(event) => handleChange(event.target.checked, 'checkbox')} />
                 <label className="block text-md font-medium text-gray-900 dark:text-white">{`Include out of stock products`}</label>
             </div>
             <div className='flex flex-row items-center my-2 gap-2'>
@@ -163,9 +188,68 @@ const Filters = ({
     )
 }
 
-function ECommerceBody() {
+const Cart = ({ cartItems, dispatchCart }) => {
+
+    const handleClick = (ele) => {
+        dispatchCart({
+            type: 'REMOVE_FROM_CART',
+            payload: ele
+        })
+    }
+
+    let totalPrice = useMemo(()=>{
+        let totalPrice = cartItems.reduce((acc, currentVal) => acc += currentVal.price, 0);
+        return totalPrice;
+    }, [cartItems]);
+
+    return (
+        <div>
+            <div className='grid grid-cols-1 shopping-item md:grid-cols-3 flex-1 my-3 mx-2'>
+                {
+                    (cartItems.length > 0) ?
+                        cartItems.map((ele, index) =>
+                            <div key={index} className='flex flex-col items-center bg-gray-800 p-4 m-2 rounded-lg gap-2'>
+                                <img src={ele.thumbnail} alt={ele.title} className='h-32 w-32 object-cover mx-auto mb-2' />
+                                <span className='text-white'>{'Item Name: ' + ele.title}</span>
+                                <span className='text-white'>{'Price: ' + ele.price}</span>
+                                <StarRating shoppingCart={true} numberOfStars={5} currentRating={ele.rating} />
+                                <button
+                                    className={`py-2 my-2 px-3 bg-slate-600 text-md rounded-md text-white ${ele.inStock ? 'disabled' : ''}`}
+                                    disabled={ele.inStock}
+                                    onClick={() => handleClick(ele)}
+                                    type='button'>{`Remove From Cart`}
+                                </button>
+                            </div>
+                        ) : (
+                            <span className="text-white">Cart Is Empty.</span>
+                        )
+                }
+            </div>
+            <div className='flex flex-row p-4 items-center justify-center'>
+                <span className="text-white font-bold">{`Total Price: ₹ ${totalPrice}`}</span>
+            </div>
+        </div>
+    )
+}
+
+function ECommerceBody({ page }) {
     let [currentPage, setCurrentPage] = useState(1);
-    let { state: { products }, filterState: { sortType , searchBox, includeStock, currentRating }, dispatchFilter } = ShoppingCartContext();
+    let {
+        state: {
+            products
+        },
+        filterState: {
+            sortType,
+            searchBox,
+            includeStock,
+            currentRating
+        },
+        dispatchFilter,
+        cartState: {
+            cartItems
+        },
+        dispatchCart,
+    } = ShoppingCartContext();
 
     return (
         <div className='flex flex-row'>
@@ -176,16 +260,18 @@ function ECommerceBody() {
                 currentRating={currentRating}
             />
             <div className='border border-gray-500 my-4'></div>
-            <Products 
-                products={products} 
-                currentPage={currentPage} 
-                setCurrentPage={setCurrentPage} 
+            {(page == 'product') ? <Products
+                products={products}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
                 sortType={sortType}
                 includeStock={includeStock}
                 dispatchFilter={dispatchFilter}
                 currentRating={currentRating}
                 searchBox={searchBox}
-            />
+                dispatchCart={dispatchCart}
+                cartItems={cartItems}
+            /> : <Cart cartItems={cartItems} dispatchCart={dispatchCart} />}
         </div>
 
     )

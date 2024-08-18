@@ -1,10 +1,9 @@
-import React, { createContext, useContext, useEffect, useReducer } from 'react'
-import { filterReducer, productReducer } from './Reducer';
+import React, { createContext, useContext, useEffect, useReducer, useState } from 'react'
+import { cartReducer, filterReducer, productReducer } from './Reducer';
 
 let ShoppingCart = createContext();
 
 function Context({children}) {
-
     let [state, dispatch] = useReducer(productReducer, {
         products: []
     });
@@ -14,6 +13,10 @@ function Context({children}) {
         includeStock: false,
         searchBox: '',
         currentRating: 0
+    });
+
+    let [cartState, dispatchCart] = useReducer(cartReducer, {
+        cartItems: []
     });
 
     async function loadApiData() {
@@ -31,7 +34,7 @@ function Context({children}) {
     },[]);
 
     return (
-        <ShoppingCart.Provider value={{ state, dispatch, filterState, dispatchFilter }}>
+        <ShoppingCart.Provider value={{ state, dispatch, filterState, dispatchFilter, cartState, dispatchCart }}>
             {children}
         </ShoppingCart.Provider>
     )

@@ -26,3 +26,18 @@ export const filterReducer = (state, action) => {
         default: return
     }
 }
+
+export const cartReducer = (state, action) => {
+    switch (action.type) {
+        case 'ADD_TO_CART':
+            return {
+                cartItems: [...state.cartItems, {...action.payload}]
+            }
+        case 'REMOVE_FROM_CART':
+            return {
+                cartItems: state.cartItems.filter((ele) => ele.id !== action.payload.id)
+            }
+        default:
+            break;
+    }
+}
