@@ -1,5 +1,6 @@
 import React from 'react'
 import { ShoppingCartContext } from '../../context/Context';
+import useDarkTheme from '../../hooks/DarkTheme';
 
 function CardActions() {
     let { dispatchFilter } = ShoppingCartContext();

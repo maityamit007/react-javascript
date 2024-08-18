@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { ShoppingCartContext } from '../../context/Context';
 import StarRating from '../StarRating/StarRating';
+import useDarkTheme from '../../hooks/DarkTheme';
 
 const Products = ({
     products,
@@ -13,7 +14,7 @@ const Products = ({
 }) => {
     let filteredProducts = useMemo(() => {
         let filteredProduct = products;
-        console.log('searchBox', searchBox);
+
         if (sortType != '') {
             filteredProduct = filteredProduct.sort((a, b) => sortType == 'asc' ? a.price - b.price : b.price - a.price)
         }
@@ -24,17 +25,17 @@ const Products = ({
             filteredProduct = filteredProduct.filter((ele) => ele.rating == currentRating);
         }
         if(searchBox !== ''){
-            filteredProduct = filteredProduct.filter((ele) => ele.title == searchBox);
+            filteredProduct = filteredProduct.filter((ele) => ele.title.toLowerCase().includes(String(searchBox).toLowerCase()));
         }
         setCurrentPage(1);
         return filteredProduct;
-    }, [sortType, includeStock, currentRating, products]);
+    }, [sortType, includeStock, currentRating, products, searchBox]);
 
     return (
         <div>
             <div className='grid grid-cols-1 shopping-item md:grid-cols-3 flex-1 my-3 mx-2'>
                 {
-                    (filteredProducts.length > 0) &&
+                    (filteredProducts.length > 0) ?
                     filteredProducts.slice(currentPage * 10 - 10, currentPage * 10).map((ele, index) =>
                         <div key={index} className='flex flex-col items-center bg-gray-800 p-4 m-2 rounded-lg gap-2'>
                             <img src={ele.thumbnail} alt={ele.title} className='h-32 w-32 object-cover mx-auto mb-2' />
@@ -42,7 +43,9 @@ const Products = ({
                             <span className='text-white'>{'Price: ' + ele.price}</span>
                             <StarRating shoppingCart={true} numberOfStars={5} currentRating={ele.rating} />
                         </div>
-                    )
+                    ): (
+                        <span className="text-white">No products found</span>
+                      )
                 }
             </div>
             <Pagination
@@ -162,7 +165,6 @@ const Filters = ({
 }
 
 function ECommerceBody() {
-
     let [currentPage, setCurrentPage] = useState(1);
     let { state: { products }, filterState: { sortType , searchBox, includeStock, currentRating }, dispatchFilter } = ShoppingCartContext();
 

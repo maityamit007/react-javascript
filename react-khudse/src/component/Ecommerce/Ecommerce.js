@@ -6,12 +6,12 @@ import ECommerceBody from './ECommerceBody';
 import CardActions from './CardActions';
 
 function Ecommerce() {
-  useDarkTheme({});
-
+  
+  useDarkTheme({className: 'dark'});
 
   return (
     <Context>
-      <div className='sm:py-0 md:py-20'>
+      <div className='sm:py-0 md:py-20 bg-gray-900'>
         <form className=' form shadow-xl md:border overflow-hidden border-gray-300 sm:mx-auto sm:max-w-lg sm:rounded-xl w-full'>
           <CardActions />
           <ECommerceBody />
