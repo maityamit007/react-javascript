@@ -1,13 +1,12 @@
 import React from 'react'
 import { ShoppingCartContext } from '../../context/Context';
 
-function CardActions({ currentPage }) {
+function EcommerceCardActions({ currentPage }) {
     let {
         dispatchFilter,
         cartState: {
             cartItems
         },
-        dispatchCart
     } = ShoppingCartContext();
 
     const handleChange = (e) => {
@@ -39,4 +38,4 @@ function CardActions({ currentPage }) {
     )
 }
 
-export default CardActions
+export default EcommerceCardActions
