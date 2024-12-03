@@ -8,14 +8,20 @@ import Comments from './Comments';
 let EnterText = ({
     nestedCommentObj,
     setNestedCommentObj,
+    id,
 }) => {
 
     let handleChange = (event) => {
-        if(event.keyCode === 13 && event.target.value){
+        if (event.keyCode === 13 && event.target.value) {
             event.preventDefault();
             setNestedCommentObj((prevState) => [
                 ...prevState,
-                { 'mother_text': event.target.value }
+                {
+                    'id': id,
+                    [`mother_text_${id}`]: {
+                        'childComment': [{ id: [`mother_text_${id}`]?.['childComment']?.length != undefined ? [`mother_text_${id}`]?.['childComment'].length + 1 : 1, 'value': event.target.value }]
+                    },
+                }
             ])
         }
     }
@@ -41,15 +47,19 @@ function NestedComments() {
                     rightContent={<EnterText
                         nestedCommentObj={nestedCommentObj}
                         setNestedCommentObj={setNestedCommentObj}
+                        id={nestedCommentObj.length + 1}
                     />}
                     cardTitle={'Nested Comments'}
                 />
                 {
                     nestedCommentObj.length > 0 &&
                     <div className='flex flex-col gap-4 p-6'>
-                        {nestedCommentObj.map((ele) =>
+                        {nestedCommentObj.map((ele, index) =>
                             <Comments
-                                comment={ele?.['mother_text']}
+                                nestedCommentObj={nestedCommentObj}
+                                commentData={ele}
+                                key={index}
+                                manipulateComment={setNestedCommentObj}
                             />
                         )
                         }
