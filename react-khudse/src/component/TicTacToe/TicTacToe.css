@@ -1,0 +1,34 @@
+.tic_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+}
+
+.circle{
+    border-radius: 100%;
+    border: 2px solid white;
+    width: 40px;
+    height: 40px;
+}
+
+.plus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px; 
+    height: 50px; 
+    font-size: 44px;
+    color: #fff;  
+    cursor: pointer;  
+    /* transition: all 0.3s ease;  */
+  }
+
+.plus::before {
+content: "X";
+}
+
+  

@@ -6,6 +6,7 @@ import NestedComments from "../../component/NestedComments/NestedComments";
 import Pagination from "../../component/Pagination/Pagination";
 import ProgressBar from "../../component/ProgressBar/ProgressBar";
 import StarRating from "../../component/StarRating/StarRating";
+import TicTacToe from "../TicTacToe/TicTacToe";
 
 export const MenuComponents = {
     CAROUSEL: {
@@ -47,5 +48,10 @@ export const MenuComponents = {
         element: <NestedComments />,
         title: 'Nested Comments',
         path: '/nested-comments'
+    },
+    TIC_TAC_TOE: {
+        element: <TicTacToe />,
+        title: 'Tic Tac Toe',
+        path: '/tic-tac-toe'
     },
 }
